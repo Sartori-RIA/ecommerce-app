@@ -104,4 +104,8 @@ abstract class ProductApi {
   @GET("/api/v2/storefront/products")
   @Header(JSON_HEADER)
   Future<ProductPaginated> products();
+
+  @GET("/api/v2/storefront/products/{id}")
+  @Header(JSON_HEADER)
+  Future<Product> productDetail(@Path("id") String id);
 }
