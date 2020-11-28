@@ -1,3 +1,4 @@
+import 'package:ecommerce/data/stores/auth_store.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_i18n/loaders/decoders/yaml_decode_strategy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'data/stores/cart_store.dart';
+import 'data/stores/product_store.dart';
 import 'pages/home/home_page.dart';
 import 'ui/theme.dart';
 import 'routes.dart';
@@ -24,7 +27,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder(
       future: Firebase.initializeApp(),
       builder: (ctx, snapshot) => MultiProvider(
-            providers: [],
+            providers: [
+              Provider<AuthStore>(create: (_) => AuthStore()),
+              Provider<CartStore>(create: (_) => CartStore()),
+              Provider<ProductStore>(create: (_) => ProductStore()),
+            ],
             child: MaterialApp(
               theme: theme,
               debugShowCheckedModeBanner: false,
