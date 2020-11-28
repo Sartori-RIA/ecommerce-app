@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce/data/models/classification.dart';
 import 'package:ecommerce/data/models/product_property.dart';
+import 'package:ecommerce/data/models/spree_image.dart';
 import 'package:ecommerce/utils/dio_config.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/http.dart';
@@ -58,7 +59,7 @@ class Product {
   String depth;
   @JsonKey(name: "options_text")
   String optionsText;
-  List<String> images;
+  List<SpreeImage> images;
 
   Product(
       {this.metaDescription,
