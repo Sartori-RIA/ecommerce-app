@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:ecommerce/data/models/classification.dart';
 import 'package:ecommerce/data/models/product_property.dart';
+import 'package:ecommerce/utils/dio_config.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:retrofit/http.dart';
 
 import 'option_type.dart';
+import 'spree_response.dart';
 
 part 'product.g.dart';
 
@@ -91,4 +95,13 @@ class Product {
       _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+}
+
+@RestApi()
+abstract class ProductApi {
+  factory ProductApi(Dio dio, {String baseUrl}) = _ProductApi;
+
+  @GET("/api/v2/storefront/products")
+  @Header(JSON_HEADER)
+  Future<ProductPaginated> products();
 }
