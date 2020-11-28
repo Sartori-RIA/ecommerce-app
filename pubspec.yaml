@@ -16,6 +16,7 @@ dependencies:
 
   # utils
   flutter_i18n: 0.20.1
+  shared_preferences: ^0.5.7
 
   # ui
   form_field_validator: ^1.0.1
