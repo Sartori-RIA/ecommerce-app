@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'data/stores/cart_store.dart';
+import 'data/stores/home_store.dart';
 import 'data/stores/product_store.dart';
 import 'pages/home/home_page.dart';
 import 'ui/theme.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
               Provider<AuthStore>(create: (_) => AuthStore()),
               Provider<CartStore>(create: (_) => CartStore()),
               Provider<ProductStore>(create: (_) => ProductStore()),
+              Provider<HomeStore>(create: (_) => HomeStore()),
             ],
             child: MaterialApp(
               theme: theme,

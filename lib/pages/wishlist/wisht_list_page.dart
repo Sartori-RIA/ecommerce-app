@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class WishListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("perfil"),
+      child: Text("Lista de desejos"),
     );
   }
 }

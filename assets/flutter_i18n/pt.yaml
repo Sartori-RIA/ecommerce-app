@@ -1,0 +1,17 @@
+pages:
+  home:
+    title: "Rituals Store"
+    navigation:
+      home: "Início"
+      favorite: "Favoritos"
+      cart: "Carrinho"
+      profile: "Perfil"
+buttons:
+  cancel: "Cancelar"
+  ok: "OK"
+messages:
+  create:
+    account:
+      error:
+        title: "Opa, parece que ocorreu um erro ao tentar criar sua conta"
+        subtitle: "Por favor, tente novamente mais tarde"
