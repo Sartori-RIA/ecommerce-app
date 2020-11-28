@@ -2,3 +2,12 @@ pt:
   pages:
     home:
       title: "Sartori Store"
+  buttons:
+    cancel: "Cancelar"
+    ok: "OK"
+  messages:
+    create:
+      account:
+        error:
+          title: "Opa, parece que ocorreu um erro ao tentar criar sua conta"
+          subtitle: "Por favor, tente novamente mais tarde"
