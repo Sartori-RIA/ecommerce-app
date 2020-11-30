@@ -37,12 +37,12 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               theme: theme,
               debugShowCheckedModeBanner: false,
-              home: HomePage(),
               navigatorObservers: [
                 FirebaseAnalyticsObserver(analytics: analytics),
               ],
               supportedLocales: [Locale("pt", "BR")],
               routes: ecommerceRoutes,
+              initialRoute: "/sign_in",
               localizationsDelegates: [
                 FlutterI18nDelegate(
                   translationLoader: FileTranslationLoader(

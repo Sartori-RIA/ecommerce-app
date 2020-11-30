@@ -24,6 +24,17 @@ final ThemeData theme = ThemeData(
     cardTheme: CardTheme(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)))),
+    inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide()
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide()
+        ),
+        border: OutlineInputBorder()
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedItemColor: Colors.black38,
         unselectedLabelStyle: TextStyle(color: Colors.black38),

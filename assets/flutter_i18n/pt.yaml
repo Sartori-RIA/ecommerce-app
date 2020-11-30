@@ -6,9 +6,22 @@ pages:
       favorite: "Favoritos"
       cart: "Carrinho"
       profile: "Perfil"
+  auth:
+    sign_in:
+      label:
+        email: "Email"
+        password: "Senha"
+      button: "ENTRAR"
+    sign_up:
+      button: "CADASTRAR"
+
+app_title: "Ritual Store"
+app_impact_phrase: "Aqui sua alma vale muito mais"
+
 buttons:
-  cancel: "Cancelar"
+  cancel: "CANCELAR"
   ok: "OK"
+
 messages:
   create:
     account:
