@@ -115,7 +115,7 @@ abstract class ProductApi {
 
   @GET("/api/products")
   @Header(JSON_HEADER)
-  Future<ProductPaginated> products();
+  Future<ProductPaginated> products(@Query("page") String page);
 
   @GET("/api/products/{id}")
   @Header(JSON_HEADER)

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce/data/repositories/auth_repository.dart';
 
 import 'authentication.dart';
 
@@ -43,13 +44,14 @@ class CustomInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  Future onError(DioError err) {
+  Future onError(DioError err) async {
     print(err.toString());
     print(err.message);
     print(err.request.uri);
    // if (err.response.statusCode == 401) {
-    //  Authentication.logout();
-   // }
+     //  final res = await AuthRepository().refresh();
+       //print(res.data);
+    //}
     return super.onError(err);
   }
 }

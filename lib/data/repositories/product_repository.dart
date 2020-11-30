@@ -11,8 +11,8 @@ class ProductRepository {
 
   ProductRepository.internal();
 
-  Future<ProductPaginated> fetchAll() async {
-    return _api.products();
+  Future<ProductPaginated> fetchAll(int page) async {
+    return _api.products(page.toString());
   }
 
   Future<Product> fetchDetails(int id) async {

@@ -15,16 +15,34 @@ class ProductPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.name),
       ),
-      body: ListView(
-        children: [
-          Text(product.description),
-          Text(product.displayPrice),
-          IconButton(
-              icon: Icon(Icons.add_shopping_cart),
-              onPressed: () {
-                _store.addItem(product.id);
-              })
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: ListView(
+          children: [
+            product.master.images.isEmpty
+                ? Image.asset(
+                    "assets/images/no-image.png",
+                    height: 100,
+                  )
+                : Image.network(product.images[0].pdpThumbnailUrl),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "R\$ ${product.displayPrice}",
+                  style: TextStyle(
+                      color: Colors.green, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                    icon: Icon(Icons.add_shopping_cart),
+                    onPressed: () {
+                      _store.addItem(product.id);
+                    })
+              ],
+            ),
+            Text(product.description),
+          ],
+        ),
       ),
     );
   }

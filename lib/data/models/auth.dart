@@ -43,11 +43,13 @@ abstract class AuthApi {
   @Header(JSON_HEADER)
   Future<HttpResponse> signUp(@Body() Map<String, dynamic> data);
 
-  @POST("/spree_oauth/token")
-  @Header(JSON_HEADER)
-  Future<HttpResponse> signIn(@Body() SignInPayload data);
-
-  @DELETE("/auth/sign_out")
+  @DELETE("/spree_oauth/authoriz")
   @Header(JSON_HEADER)
   Future signOut();
+
+  @POST("/spree_oauth/token")
+  @Header(JSON_HEADER)
+  Future<HttpResponse> token(@Body() Map<String, dynamic> data);
+
+
 }

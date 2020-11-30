@@ -17,7 +17,7 @@ class _ProductsPageState extends State<ProductsPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _store = Provider.of<ProductStore>(context);
-    _store.load();
+    _store.load(_store.page);
   }
 
   @override
@@ -26,10 +26,15 @@ class _ProductsPageState extends State<ProductsPage> {
         builder: (_) => LoadingOverlay(
             isLoading: _store.loading,
             child: GridView.builder(
-                itemCount: _store.total,
+                itemCount: _store.products.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
-                itemBuilder: (_, index) =>
-                    ProductCard(product: _store.products[index]))));
+                itemBuilder: (_, index) {
+                  if ((index + 1) >= _store.products.length) {
+                    _store.load(_store.page + 1);
+                    return Container();
+                  } else
+                    return ProductCard(product: _store.products[index]);
+                })));
   }
 }
