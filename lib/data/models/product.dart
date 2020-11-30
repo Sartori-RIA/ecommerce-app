@@ -17,10 +17,12 @@ class Product {
   String name;
   String description;
   String price;
+  String sku;
   @JsonKey(name: "cost_price")
   String costPrice;
   @JsonKey(name: "display_price")
   String displayPrice;
+  String currency;
   @JsonKey(name: "available_on")
   String availableOn;
   String slug;
@@ -40,8 +42,9 @@ class Product {
   List<ProductProperty> productProperties;
   List<Classification> classifications;
   @JsonKey(name: "has_variants")
+  bool purchasable;
   bool hasVariants;
-  @JsonKey(name: "track+inventory")
+  @JsonKey(name: "track_inventory")
   bool trackInventory;
   @JsonKey(name: "is_admin")
   bool isMaster;
@@ -60,37 +63,45 @@ class Product {
   @JsonKey(name: "options_text")
   String optionsText;
   List<SpreeImage> images;
+  List<Product> variants;
+  Product master;
 
-  Product(
-      {this.metaDescription,
-      this.id,
-      this.name,
-      this.description,
-      this.height,
-      this.weight,
-      this.availableOn,
-      this.classifications,
-      this.costPrice,
-      this.depth,
-      this.displayPrice,
-      this.hasVariants,
-      this.images,
-      this.inStock,
-      this.isBackorderable,
-      this.isDestroyed,
-      this.isMaster,
-      this.isOrderable,
-      this.metaKeywords,
-      this.optionsText,
-      this.optionTypes,
-      this.price,
-      this.productProperties,
-      this.shippingCategoryId,
-      this.slug,
-      this.taxonIds,
-      this.totalOnHand,
-      this.trackInventory,
-      this.width});
+  Product({
+    this.metaDescription,
+    this.id,
+    this.name,
+    this.description,
+    this.height,
+    this.weight,
+    this.availableOn,
+    this.classifications,
+    this.costPrice,
+    this.depth,
+    this.displayPrice,
+    this.hasVariants,
+    this.images,
+    this.inStock,
+    this.isBackorderable,
+    this.isDestroyed,
+    this.isMaster,
+    this.isOrderable,
+    this.metaKeywords,
+    this.optionsText,
+    this.optionTypes,
+    this.price,
+    this.productProperties,
+    this.shippingCategoryId,
+    this.slug,
+    this.taxonIds,
+    this.totalOnHand,
+    this.trackInventory,
+    this.width,
+    this.currency,
+    this.variants,
+    this.master,
+    this.purchasable,
+    this.sku,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
@@ -102,11 +113,11 @@ class Product {
 abstract class ProductApi {
   factory ProductApi(Dio dio, {String baseUrl}) = _ProductApi;
 
-  @GET("/api/v2/storefront/products")
+  @GET("/api/products")
   @Header(JSON_HEADER)
   Future<ProductPaginated> products();
 
-  @GET("/api/v2/storefront/products/{id}")
+  @GET("/api/products/{id}")
   @Header(JSON_HEADER)
   Future<Product> productDetail(@Path("id") String id);
 }

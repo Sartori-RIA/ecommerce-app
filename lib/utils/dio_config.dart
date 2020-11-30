@@ -25,8 +25,6 @@ class DioConfig {
       _dio = new Dio(options);
     }
     _dio.options.baseUrl = _baseUrl;
-    _dio.options.connectTimeout = 5000; //5s
-    _dio.options.receiveTimeout = 3000;
     _dio.interceptors.add(CustomInterceptors());
     return _dio;
   }
@@ -37,7 +35,8 @@ class CustomInterceptors extends InterceptorsWrapper {
   Future onRequest(RequestOptions options) async {
     final auth = await Authentication.authenticated();
     final token = await Authentication.getToken();
-    if (auth) options.headers["Authorization"] = token;
+    //if (auth) options.headers["Authorization"] = token;
+   options.headers["Authorization"] = "Bearer VInLVBw8LrZlUegMzbHgL7SWfK6NUMUMzsAaJ33Wr98";
     options.headers["Accept"] = "application/json";
     options.headers["X-Spree-Token"] = API_KEY;
     return super.onRequest(options);
@@ -47,9 +46,10 @@ class CustomInterceptors extends InterceptorsWrapper {
   Future onError(DioError err) {
     print(err.toString());
     print(err.message);
-    if (err.response.statusCode == 401) {
-      Authentication.logout();
-    }
+    print(err.request.uri);
+   // if (err.response.statusCode == 401) {
+    //  Authentication.logout();
+   // }
     return super.onError(err);
   }
 }

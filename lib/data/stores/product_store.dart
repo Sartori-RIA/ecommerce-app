@@ -12,6 +12,8 @@ abstract class _ProductStore with Store {
   ObservableList<Product> products = ObservableList.of([]);
 
   @observable
+  int total = 0;
+  @observable
   bool loading;
 
   final _repository = ProductRepository();
@@ -21,6 +23,7 @@ abstract class _ProductStore with Store {
     try {
       loading = true;
       final response = await _repository.fetchAll();
+      total = response.totalCount;
       response.products.forEach((element) => products.add(element));
     } finally {
       loading = false;

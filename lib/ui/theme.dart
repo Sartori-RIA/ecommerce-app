@@ -18,6 +18,9 @@ final ThemeData theme = ThemeData(
     primarySwatch: MaterialColor(0xFF212121, colorCodes),
     accentColor: Color(0xFFB71C1C),
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    appBarTheme: AppBarTheme(
+        centerTitle: true
+    ),
     cardTheme: CardTheme(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)))),

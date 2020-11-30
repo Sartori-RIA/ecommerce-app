@@ -1,3 +1,4 @@
+import 'package:ecommerce/data/models/order.dart';
 import 'package:ecommerce/data/models/product.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -14,7 +15,12 @@ class SpreeResponse {
   int perPage;
   int pages;
 
-  SpreeResponse({this.currentPage, this.count, this.pages, this.perPage, this.totalCount});
+  SpreeResponse(
+      {this.currentPage,
+      this.count,
+      this.pages,
+      this.perPage,
+      this.totalCount});
 
   factory SpreeResponse.fromJson(Map<String, dynamic> json) =>
       _$SpreeResponseFromJson(json);
@@ -23,7 +29,7 @@ class SpreeResponse {
 }
 
 @JsonSerializable()
-class ProductPaginated extends SpreeResponse{
+class ProductPaginated extends SpreeResponse {
   List<Product> products;
 
   ProductPaginated({this.products});
@@ -32,4 +38,16 @@ class ProductPaginated extends SpreeResponse{
       _$ProductPaginatedFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductPaginatedToJson(this);
+}
+
+@JsonSerializable()
+class OrderPaginated extends SpreeResponse {
+  List<Order> orders;
+
+  OrderPaginated({this.orders});
+
+  factory OrderPaginated.fromJson(Map<String, dynamic> json) =>
+      _$OrderPaginatedFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderPaginatedToJson(this);
 }

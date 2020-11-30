@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce/data/models/spree_model.dart';
 import 'package:ecommerce/utils/dio_config.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'cart.g.dart';
 
@@ -10,8 +12,9 @@ class Cart {
   String id;
   String type;
   CartAttributes attributes;
+  CartRelationships relationships;
 
-  Cart({this.id, this.type, this.attributes});
+  Cart({this.id, this.type, this.relationships, this.attributes});
 
   factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
 
@@ -116,25 +119,20 @@ class CartAttributes {
 @JsonSerializable()
 class CartRelationships {
   @JsonKey(name: "line_items")
-  Map<String, dynamic> lineItems;
-  Map<String, dynamic> variants;
-  Map<String, dynamic> promotions;
-  Map<String, dynamic> payments;
-  Map<String, dynamic> shipments;
-  Map<String, dynamic> user;
-  @JsonKey(name: "billing_address")
-  Map<String, dynamic> billingAddress;
-  @JsonKey(name: "shipping_address")
-  Map<String, dynamic> shippingAddress;
+  SpreeRelationshipsItem lineItems;
+  SpreeRelationshipsItem variants;
+  //SpreeRelationshipsItem promotions;
+  //SpreeRelationshipsItem payments;
+  //SpreeRelationshipsItem shipments;
+  //SpreeRelationshipsItem user;
+  //@JsonKey(name: "billing_address")
+  //SpreeRelationshipsItem billingAddress;
+  //@JsonKey(name: "shipping_address")
+ // SpreeRelationshipsItem shippingAddress;
 
   CartRelationships(
-      {this.billingAddress,
+      {
       this.lineItems,
-      this.payments,
-      this.promotions,
-      this.shipments,
-      this.shippingAddress,
-      this.user,
       this.variants});
 
   factory CartRelationships.fromJson(Map<String, dynamic> json) =>
@@ -149,9 +147,25 @@ abstract class CartApi {
 
   @POST("/api/v2/storefront/cart")
   @Header(JSON_HEADER)
-  Future<Cart> create();
+  Future<HttpResponse> create();
 
   @GET("/api/v2/storefront/cart")
   @Header(JSON_HEADER)
-  Future<Cart> fetchCart();
+  Future<HttpResponse> fetchCart();
+
+  @POST("/api/v2/storefront/cart/add_item")
+  @Header(JSON_HEADER)
+  Future<HttpResponse> addItem(@Body() Map<String, dynamic> data);
+
+  @DELETE("/api/v2/storefront/cart/remove_line_item/{line_id}")
+  @Header(JSON_HEADER)
+  Future<HttpResponse> removeItem(@Path("line_id") String lineId);
+
+  @PATCH("/api/v2/storefront/cart/empty")
+  @Header(JSON_HEADER)
+  Future<HttpResponse> empty();
+
+  @PATCH("/api/v2/storefront/cart/set_quantity")
+  @Header(JSON_HEADER)
+  Future<HttpResponse> setQuantity(@Body() Map<String, dynamic> data);
 }
