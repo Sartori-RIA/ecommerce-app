@@ -29,10 +29,13 @@ class _CartPageState extends State<CartPage> {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: ListView(
                   children: [
-                    Center(
-                      child: Text(
-                        "Meu carrinho de rituais e pactos",
-                        style: Theme.of(context).textTheme.headline6,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30, top: 30),
+                      child: Center(
+                        child: Text(
+                          "Meu carrinho de rituais e pactos",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
                     ..._store?.order?.lineItems
@@ -59,7 +62,7 @@ class _CartPageState extends State<CartPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30),
-                      child: RaisedButton(
+                      child: FlatButton(
                           onPressed: () {
                             _store.empty();
                           },
