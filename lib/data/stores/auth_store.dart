@@ -1,6 +1,7 @@
 import 'package:ecommerce/data/models/auth.dart';
 import 'package:ecommerce/data/repositories/auth_repository.dart';
 import 'package:ecommerce/ui/dialogs/ecommerce_dialog.dart';
+import 'package:ecommerce/utils/authentication.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -42,8 +43,28 @@ abstract class _AuthStore with Store {
       passwordConfirmation = value.trim();
 
   @action
+  Future<void> signIn(BuildContext context) async {
+    try {
+      loading = true;
+      final response =
+          await _repository.signIn(username: username, password: password);
+      Authentication.saveToken(
+          response.data["access_token"], response.data["refresh_token"]);
+      Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+    } catch (e, s) {
+      print(e);
+      print(s);
+      _errorDialog(context, "messages.sign.up.error.title",
+          "messages.sign.in.error.subtitle");
+    } finally {
+      loading = false;
+    }
+  }
+
+  @action
   Future<void> signUp(BuildContext context) async {
     try {
+      loading = true;
       await _repository.signUp(SignUpPayload(
           email: email,
           password: password,
@@ -52,25 +73,28 @@ abstract class _AuthStore with Store {
     } catch (e, s) {
       print(e);
       print(s);
-      showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (ctx) => EcommerceDialog(
-                title: FlutterI18n.translate(
-                    context, "messages.create.account.error.title"),
-                child: Container(
-                  child: Text(
-                    FlutterI18n.translate(
-                        context, "messages.create.account.error.subtitle"),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                okPress: () => Navigator.pop(ctx),
-                showOkButton: true,
-                showCancelButton: false,
-              ));
+      _errorDialog(context, "messages.create.account.error.title",
+          "messages.create.account.error.subtitle");
     } finally {
       loading = false;
     }
+  }
+
+  void _errorDialog(BuildContext context, String title, String subtitle) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (ctx) => EcommerceDialog(
+              title: FlutterI18n.translate(context, title),
+              child: Container(
+                child: Text(
+                  FlutterI18n.translate(context, subtitle),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              okPress: () => Navigator.pop(ctx),
+              showOkButton: true,
+              showCancelButton: false,
+            ));
   }
 }

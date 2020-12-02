@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce/data/repositories/auth_repository.dart';
 
 import 'authentication.dart';
 
@@ -16,7 +15,7 @@ class DioConfig {
   Dio _dio;
 
   //final String _baseUrl = "https://sartori-ecommerce-demo.herokuapp.com/";
-  final String _baseUrl = "http://192.168.0.193";
+  final String _baseUrl = "http://192.168.0.194";
 
   get dio {
     BaseOptions options = new BaseOptions(
@@ -36,8 +35,7 @@ class CustomInterceptors extends InterceptorsWrapper {
   Future onRequest(RequestOptions options) async {
     final auth = await Authentication.authenticated();
     final token = await Authentication.getToken();
-    //if (auth) options.headers["Authorization"] = token;
-   options.headers["Authorization"] = "Bearer VInLVBw8LrZlUegMzbHgL7SWfK6NUMUMzsAaJ33Wr98";
+    if (auth) options.headers["Authorization"] = "Bearer $token";
     options.headers["Accept"] = "application/json";
     options.headers["X-Spree-Token"] = API_KEY;
     return super.onRequest(options);
@@ -48,9 +46,9 @@ class CustomInterceptors extends InterceptorsWrapper {
     print(err.toString());
     print(err.message);
     print(err.request.uri);
-   // if (err.response.statusCode == 401) {
-     //  final res = await AuthRepository().refresh();
-       //print(res.data);
+    // if (err.response.statusCode == 401) {
+    //  final res = await AuthRepository().refresh();
+    //print(res.data);
     //}
     return super.onError(err);
   }

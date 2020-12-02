@@ -43,7 +43,7 @@ abstract class AuthApi {
   @Header(JSON_HEADER)
   Future<HttpResponse> signUp(@Body() Map<String, dynamic> data);
 
-  @DELETE("/spree_oauth/authoriz")
+  @DELETE("/spree_oauth/authorize")
   @Header(JSON_HEADER)
   Future signOut();
 
