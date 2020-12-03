@@ -1,3 +1,4 @@
+import 'package:ecommerce/data/stores/account_store.dart';
 import 'package:ecommerce/data/stores/auth_store.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
               Provider<CartStore>(create: (_) => CartStore()),
               Provider<ProductStore>(create: (_) => ProductStore()),
               Provider<HomeStore>(create: (_) => HomeStore()),
+              Provider<AccountStore>(create: (_) => AccountStore()),
             ],
             child: MaterialApp(
               theme: theme,
