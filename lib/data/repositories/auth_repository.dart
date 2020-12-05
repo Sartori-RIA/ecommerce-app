@@ -9,9 +9,9 @@ class AuthRepository {
 
   factory AuthRepository() => _instance;
 
-  final _api = AuthApi(DioConfig().dio);
-
   AuthRepository.internal();
+
+  final _api = AuthApi(DioConfig().dio);
 
   Future<HttpResponse> signUp(SignUpPayload data) async =>
       await _api.signUp({"user": data});

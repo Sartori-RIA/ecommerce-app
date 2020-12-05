@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce/data/models/auth.dart';
 import 'package:ecommerce/data/repositories/auth_repository.dart';
 import 'package:ecommerce/ui/dialogs/ecommerce_dialog.dart';
@@ -14,6 +16,9 @@ class AuthStore = _AuthStore with _$AuthStore;
 abstract class _AuthStore with Store {
   @observable
   bool loading = false;
+
+  @observable
+  bool success = false;
 
   @observable
   String email = "";
@@ -48,10 +53,14 @@ abstract class _AuthStore with Store {
       loading = true;
       final response =
           await _repository.signIn(username: username, password: password);
-      Authentication.saveToken(
-          response.data["access_token"], response.data["refresh_token"]);
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+      success = true;
+      Timer(Duration(seconds: 1), () {
+        Authentication.saveToken(
+            response.data["access_token"], response.data["refresh_token"]);
+        Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+      });
     } catch (e, s) {
+      success = false;
       print(e);
       print(s);
       _errorDialog(context, "messages.sign.up.error.title",

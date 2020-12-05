@@ -1,5 +1,6 @@
 import 'package:ecommerce/data/models/order.dart';
 import 'package:ecommerce/data/models/product.dart';
+import 'package:ecommerce/data/models/wish_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'spree_response.g.dart';
@@ -50,4 +51,16 @@ class OrderPaginated extends SpreeResponse {
       _$OrderPaginatedFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderPaginatedToJson(this);
+}
+
+@JsonSerializable()
+class WishListsPaginated extends SpreeResponse {
+  List<WishList> wishlists;
+
+  WishListsPaginated({this.wishlists});
+
+  factory WishListsPaginated.fromJson(Map<String, dynamic> json) =>
+      _$WishListsPaginatedFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WishListsPaginatedToJson(this);
 }

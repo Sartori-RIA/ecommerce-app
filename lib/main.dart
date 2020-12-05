@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'data/stores/cart_store.dart';
 import 'data/stores/home_store.dart';
 import 'data/stores/product_store.dart';
+import 'data/stores/wish_list_store.dart';
 import 'pages/home/home_page.dart';
 import 'ui/theme.dart';
 import 'routes.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
               Provider<ProductStore>(create: (_) => ProductStore()),
               Provider<HomeStore>(create: (_) => HomeStore()),
               Provider<AccountStore>(create: (_) => AccountStore()),
+              Provider<WishListStore>(create: (_) => WishListStore()),
             ],
             child: MaterialApp(
               theme: theme,

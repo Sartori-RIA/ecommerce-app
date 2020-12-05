@@ -9,9 +9,9 @@ class CartRepository {
 
   factory CartRepository() => _instance;
 
-  final _api = CartApi(DioConfig().dio);
-
   CartRepository.internal();
+
+  final _api = CartApi(DioConfig().dio);
 
   Future<Cart> load() async {
     try {

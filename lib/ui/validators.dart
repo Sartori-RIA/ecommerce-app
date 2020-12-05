@@ -3,7 +3,13 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class Validators {
-  static final passwordValidator = (BuildContext context) => MultiValidator([
+  static final required = (BuildContext context) => MultiValidator([
+        RequiredValidator(
+            errorText:
+                FlutterI18n.translate(context, "validators.name.required"))
+      ]);
+
+  static final password = (BuildContext context) => MultiValidator([
         RequiredValidator(
             errorText:
                 FlutterI18n.translate(context, "validators.password.required")),
@@ -15,7 +21,7 @@ class Validators {
                 context, "validators.password.max_length"))
       ]);
 
-  static final emailValidator = (BuildContext context) => MultiValidator([
+  static final email = (BuildContext context) => MultiValidator([
         EmailValidator(
             errorText:
                 FlutterI18n.translate(context, "validators.email.invalid")),
@@ -24,7 +30,7 @@ class Validators {
                 FlutterI18n.translate(context, "validators.email.required")),
       ]);
 
-  static final confirmPasswordValidator =
+  static final confirmPassword =
       (BuildContext context, String value, String password) => MatchValidator(
               errorText: FlutterI18n.translate(
                   context, "validators.confirm_password.equals"))

@@ -7,9 +7,9 @@ class ProductRepository {
 
   factory ProductRepository() => _instance;
 
-  final _api = ProductApi(DioConfig().dio);
-
   ProductRepository.internal();
+
+  final _api = ProductApi(DioConfig().dio);
 
   Future<ProductPaginated> fetchAll(int page) async {
     return _api.products(page.toString());

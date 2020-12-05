@@ -2,6 +2,7 @@ import 'package:ecommerce/data/models/cart.dart';
 import 'package:ecommerce/data/models/order.dart';
 import 'package:ecommerce/data/repositories/cart_repository.dart';
 import 'package:ecommerce/data/repositories/order_repository.dart';
+import 'package:ecommerce/pages/cart/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -19,6 +20,9 @@ abstract class _CartStore with Store {
   @observable
   Order order;
 
+  @observable
+  int totalItems = 0;
+
   final _repository = CartRepository();
   final _orderRepository = OrderRepository();
 
@@ -29,6 +33,7 @@ abstract class _CartStore with Store {
       cart = await _repository.load();
       final res = await _orderRepository.findOrder(cart.attributes.number);
       order = res;
+      totalItems = order.totalQuantity;
     } finally {
       loading = false;
     }
@@ -38,6 +43,7 @@ abstract class _CartStore with Store {
   Future<void> addItem(int itemId) async {
     cart = await _repository.addItem(quantity: 1, itemId: itemId);
     order = await _orderRepository.findOrder(cart.attributes.number);
+    totalItems = order.totalQuantity;
   }
 
   @action
@@ -46,18 +52,25 @@ abstract class _CartStore with Store {
     cart = await _repository.setQuantity(
         quantity: quantity, lineItemId: lineItemId);
     order = await _orderRepository.findOrder(cart.attributes.number);
-
+    totalItems = order.totalQuantity;
   }
 
   @action
   Future<void> remove(int lineItemId) async {
     cart = await _repository.removeItem(lineItemId);
     order = await _orderRepository.findOrder(cart.attributes.number);
+    totalItems = order.totalQuantity;
   }
 
   @action
   Future<void> empty() async {
     cart = await _repository.empty();
     order = await _orderRepository.findOrder(cart.attributes.number);
+    totalItems = order.totalQuantity;
   }
+
+  @computed
+  List<Widget> get items => (order == null || order.lineItems.isEmpty)
+      ? [Container()]
+      : order.lineItems.map((e) => CartItem(item: e)).toList();
 }

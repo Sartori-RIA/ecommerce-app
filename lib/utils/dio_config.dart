@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'authentication.dart';
 
 const JSON_HEADER = "Content-Type:application/json";
-const API_KEY = "eb22fcdefadcb06c1dca082f73a96bc20f2463f8bb68ef26";
+const API_KEY = "0bf8c3b64b7c2bc8c78cf5546f113a5c91949d2592462719";
 
 class DioConfig {
   static final DioConfig _instance = DioConfig.internal();

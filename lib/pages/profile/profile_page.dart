@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(labelText: "email"),
-                    validator: Validators.emailValidator(context),
+                    validator: Validators.email(context),
                     onChanged: _store.setEmail,
                   ),
                 ),
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(labelText: "Senha"),
                     obscureText: true,
-                    validator: Validators.passwordValidator(context),
+                    validator: Validators.password(context),
                     onChanged: _store.setPassword,
                   ),
                 ),
@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(labelText: "Confirmar Senha"),
                     obscureText: true,
-                    validator: (val) => Validators.confirmPasswordValidator(
+                    validator: (val) => Validators.confirmPassword(
                         context, _store.passwordConfirmation, _store.password),
                     onChanged: _store.setPasswordConfirmation,
                   ),

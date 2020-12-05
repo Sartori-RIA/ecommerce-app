@@ -7,9 +7,9 @@ class OrderRepository {
 
   factory OrderRepository() => _instance;
 
-  final _api = OrderApi(DioConfig().dio);
-
   OrderRepository.internal();
+
+  final _api = OrderApi(DioConfig().dio);
 
   Future<Order> findOrder(String orderNumber) async =>
       await _api.findOrder(orderNumber);

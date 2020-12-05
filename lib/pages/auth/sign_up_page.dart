@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce/data/stores/auth_store.dart';
 import 'package:ecommerce/pages/auth/widgets/auth_container.dart';
 import 'package:ecommerce/ui/buttons/primary_button.dart';
@@ -5,6 +7,7 @@ import 'package:ecommerce/ui/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordConfirmationController = TextEditingController();
+  final _btnController = new RoundedLoadingButtonController();
   final _formKey = GlobalKey<FormState>();
   AuthStore store;
 
@@ -39,7 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(labelText: "email"),
-                    validator: Validators.emailValidator(context),
+                    validator: Validators.email(context),
                     onChanged: store.setEmail,
                   ),
                 ),
@@ -51,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(labelText: "Senha"),
                     obscureText: true,
-                    validator: Validators.passwordValidator(context),
+                    validator: Validators.password(context),
                     onChanged: store.setPassword,
                   ),
                 ),
@@ -63,19 +67,31 @@ class _SignUpPageState extends State<SignUpPage> {
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(labelText: "Confirmar Senha"),
                     obscureText: true,
-                    validator: (val) => Validators.confirmPasswordValidator(
+                    validator: (val) => Validators.confirmPassword(
                         context, store.passwordConfirmation, store.password),
                     onChanged: store.setPasswordConfirmation,
                   ),
                 ),
-                PrimaryButton(
-                    text: "CRIAR CONTA",
-                    loading: store.loading,
-                    onPress: () {
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: RoundedLoadingButton(
+                    child: Text(
+                      "CRIAR CONTA",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    controller: _btnController,
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () {
                       if (_formKey.currentState.validate()) {
                         store.signUp(context);
+                      } else {
+                        _btnController.error();
+                        Timer(Duration(seconds: 1), () => _btnController.reset());
                       }
-                    })
+                    },
+                  ),
+                ),
               ],
             ),
           ),
