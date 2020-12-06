@@ -63,7 +63,7 @@ abstract class _AuthStore with Store {
       success = false;
       print(e);
       print(s);
-      _errorDialog(context, "messages.sign.up.error.title",
+      _errorDialog(context, "messages.sign.in.error.title",
           "messages.sign.in.error.subtitle");
     } finally {
       loading = false;
@@ -82,8 +82,8 @@ abstract class _AuthStore with Store {
     } catch (e, s) {
       print(e);
       print(s);
-      _errorDialog(context, "messages.create.account.error.title",
-          "messages.create.account.error.subtitle");
+      _errorDialog(context, "messages.sign.up.error.title",
+          "messages.sign.up.error.subtitle");
     } finally {
       loading = false;
     }

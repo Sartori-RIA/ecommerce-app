@@ -2,6 +2,7 @@ import 'package:ecommerce/data/stores/account_store.dart';
 import 'package:ecommerce/ui/buttons/primary_button.dart';
 import 'package:ecommerce/ui/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(labelText: "email"),
+                    decoration: InputDecoration(labelText: FlutterI18n.translate(context, "model.user.attributes.email")),
                     validator: Validators.email(context),
                     onChanged: _store.setEmail,
                   ),
@@ -54,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     controller: _passwordController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(labelText: "Senha"),
+                    decoration: InputDecoration(labelText: FlutterI18n.translate(context, "model.user.attributes.password")),
                     obscureText: true,
                     validator: Validators.password(context),
                     onChanged: _store.setPassword,
@@ -66,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     controller: _passwordConfirmationController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.done,
-                    decoration: InputDecoration(labelText: "Confirmar Senha"),
+                    decoration: InputDecoration(labelText: FlutterI18n.translate(context, "model.user.attributes.confirm_password")),
                     obscureText: true,
                     validator: (val) => Validators.confirmPassword(
                         context, _store.passwordConfirmation, _store.password),
@@ -75,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 PrimaryButton(
                   loading: _store.loading,
-                  text: "ATUALIZAR",
+                  text: "buttons.update",
                   onPress: () {
                     if(_formKey.currentState.validate()) {
                       _store.update(context);

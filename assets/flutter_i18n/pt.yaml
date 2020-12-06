@@ -1,30 +1,47 @@
 pages:
   home:
-    title: "Rituals Store"
+    title: Rituals Store
     navigation:
-      home: "Início"
-      favorite: "Favoritos"
-      cart: "Carrinho"
-      profile: "Perfil"
+      home: Início
+      favorite: Favoritos
+      cart: Carrinho
+      profile: Perfil
   auth:
     sign_in:
-      label:
-        email: "Email"
-        password: "Senha"
-      button: "ENTRAR"
+      button: ENTRAR
     sign_up:
-      button: "CADASTRAR"
+      title: Ainda não tem conta?
+      button: CADASTRAR
+  product:
+    price: "R$: {price}"
+  cart:
+    title: Meu carrinho de rituais e pactos
+    total: TOTAL
+    buttons: FINALIZAR COMPRA
+    qnt: "QNT: {qnt}"
 
-app_title: "Ritual Store"
-app_impact_phrase: "Aqui sua alma vale muito mais"
+model:
+  user:
+    attributes:
+      email: Email
+      password: Senha
+      confirm_password: Confirmar Senha
+
+app_title: Ritual Store
+app_impact_phrase: Aqui sua alma vale muito mais
 
 buttons:
-  cancel: "CANCELAR"
-  ok: "OK"
+  cancel: CANCELAR
+  ok: OK
+  update: ATUALIZAR
 
 messages:
-  create:
-    account:
+  sign:
+    in:
       error:
-        title: "Opa, parece que ocorreu um erro ao tentar criar sua conta"
-        subtitle: "Por favor, tente novamente mais tarde"
+        title: Opa, alguns dados estão incorretos
+        subtitle: cheque seu email e senha por favor
+    up:
+      error:
+        title: Opa, parece que ocorreu um erro ao tentar criar sua conta
+        subtitle: Por favor, tente novamente mais tarde

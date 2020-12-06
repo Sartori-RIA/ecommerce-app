@@ -5,6 +5,7 @@ import 'package:ecommerce/pages/auth/widgets/auth_container.dart';
 import 'package:ecommerce/ui/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -49,7 +50,9 @@ class _SignInPageState extends State<SignInPage> {
                       controller: _usernameController,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(labelText: "email"),
+                      decoration: InputDecoration(
+                          labelText: FlutterI18n.translate(
+                              context, "model.user.attributes.email")),
                       validator: Validators.email(context),
                       onChanged: store.setUsername,
                     ),
@@ -61,7 +64,9 @@ class _SignInPageState extends State<SignInPage> {
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
-                      decoration: InputDecoration(labelText: "password"),
+                      decoration: InputDecoration(
+                          labelText: FlutterI18n.translate(
+                              context, "model.user.attributes.password")),
                       validator: Validators.password(context),
                       onChanged: store.setPassword,
                     ),
@@ -70,7 +75,7 @@ class _SignInPageState extends State<SignInPage> {
                     padding: const EdgeInsets.only(top: 30),
                     child: RoundedLoadingButton(
                       child: Text(
-                        "ENTRAR",
+                      FlutterI18n.translate(context, "pages.auth.sign_in.button"),
                         style: TextStyle(color: Colors.white),
                       ),
                       controller: _btnController,
@@ -80,7 +85,8 @@ class _SignInPageState extends State<SignInPage> {
                           store.signIn(context);
                         } else {
                           _btnController.error();
-                          Timer(Duration(seconds: 1), () => _btnController.reset());
+                          Timer(Duration(seconds: 1),
+                              () => _btnController.reset());
                         }
                       },
                     ),
@@ -91,7 +97,8 @@ class _SignInPageState extends State<SignInPage> {
                         onPressed: () {
                           Navigator.pushNamed(context, "/sign_up");
                         },
-                        child: Text("Ainda não tem conta?")),
+                        child: Text(FlutterI18n.translate(
+                            context, "pages.auth.sign_up.title"))),
                   )
                 ],
               ));

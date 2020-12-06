@@ -31,11 +31,11 @@ class AuthContainer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            FlutterI18n.translate(context, "pages.home.title"),
+                            FlutterI18n.translate(context, "app_title"),
                             style: Theme.of(context).textTheme.headline4,
                           ),
                         ),
-                        Text("Aqui a sua alma vale muito mais"),
+                        Text(FlutterI18n.translate(context, "app_impact_phrase")),
                         child
                       ],
                     ),

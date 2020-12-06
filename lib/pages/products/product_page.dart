@@ -2,6 +2,7 @@ import 'package:ecommerce/data/models/product.dart';
 import 'package:ecommerce/data/stores/cart_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
@@ -46,7 +47,8 @@ class ProductPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "R\$ ${product.displayPrice}",
+                    FlutterI18n.translate(context, "pages.product.price",
+                        translationParams: {"price": product.displayPrice}),
                     style: TextStyle(
                         color: Colors.green, fontWeight: FontWeight.bold),
                   ),
