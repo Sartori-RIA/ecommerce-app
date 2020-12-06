@@ -5,7 +5,6 @@ import 'pages/auth/sign_up_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/orders/order_page.dart';
 import 'pages/orders/orders_page.dart';
-import 'pages/wishlist/wisht_list_page.dart';
 
 final Map<String, WidgetBuilder> ecommerceRoutes = {
   '/sign_in': (_) => SignInPage(),
@@ -13,5 +12,4 @@ final Map<String, WidgetBuilder> ecommerceRoutes = {
   '/home': (_) => HomePage(),
   '/orders': (_) => OrdersPage(),
   '/orders/:id': (_) => OrderPage(),
-  '/wish_list': (_) => WishListPage(),
 };

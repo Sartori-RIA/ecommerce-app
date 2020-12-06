@@ -57,14 +57,6 @@ class _CartPageState extends State<CartPage> {
                     bgColor: Theme.of(context).accentColor,
                     textColor: Colors.white,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: FlatButton(
-                        onPressed: () {
-                          _store.empty();
-                        },
-                        child: Text("LIMPAR")),
-                  ),
                 ],
               ),
             ));

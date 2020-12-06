@@ -1,6 +1,5 @@
 import 'package:ecommerce/data/models/product.dart';
 import 'package:ecommerce/data/stores/cart_store.dart';
-import 'package:ecommerce/data/stores/wish_list_store.dart';
 import 'package:ecommerce/pages/products/product_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _store = Provider.of<CartStore>(context);
-    final _wishListStore = Provider.of<WishListStore>(context);
     return product == null
         ? Container()
         : GestureDetector(
@@ -26,20 +24,12 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        product.master.images.isEmpty
-                            ? Image.asset(
-                                "assets/images/no-image.png",
-                                height: 80,
-                              )
-                            : Image.network(product.images[0].pdpThumbnailUrl),
-                        IconButton(
-                            icon: Icon(CupertinoIcons.heart),
-                            iconSize: 20,
-                            onPressed: () => {})
-                      ],
-                    ),
+                    product.master.images.isEmpty
+                        ? Image.asset(
+                            "assets/images/no-image.png",
+                            height: 80,
+                          )
+                        : Image.network(product.images[0].pdpThumbnailUrl),
                     Text(product.name),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
