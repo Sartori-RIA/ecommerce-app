@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'authentication.dart';
 
 const JSON_HEADER = "Content-Type:application/json";
-const API_KEY = "0bf8c3b64b7c2bc8c78cf5546f113a5c91949d2592462719";
+//const API_KEY = "0bf8c3b64b7c2bc8c78cf5546f113a5c91949d2592462719";
+// PROD KEY
+const API_KEY = "1531babba8c78f88dc846a0c35ba647acbac2138a6a636af";
 
 class DioConfig {
   static final DioConfig _instance = DioConfig.internal();
@@ -14,8 +16,8 @@ class DioConfig {
 
   Dio _dio;
 
-  //final String _baseUrl = "https://sartori-ecommerce-demo.herokuapp.com/";
-  final String _baseUrl = "http://192.168.0.194";
+  final String _baseUrl = "https://sartori-ecommerce-demo.herokuapp.com/";
+  //final String _baseUrl = "http://192.168.0.194";
 
   get dio {
     BaseOptions options = new BaseOptions(

@@ -30,7 +30,13 @@ abstract class _ProductStore with Store {
       total = response.totalCount;
       page = response.currentPage;
       pages = response.pages;
-      response.products.forEach((element) => products.add(element));
+      response.products.forEach((element) {
+        if (products.firstWhere((e) => e.id == element.id,
+                orElse: () => null) ==
+            null) {
+          products.add(element);
+        }
+      });
     } finally {
       loading = false;
     }

@@ -30,14 +30,19 @@ class ProductCard extends StatelessWidget {
                             "assets/images/no-image.png",
                             height: 80,
                           )
-                        : Image.network(product.images[0].pdpThumbnailUrl),
-                    Text(product.name),
+                        : Image.network(
+                            product.master.images[0].pdpThumbnailUrl,
+                            height: 100,
+                          ),
+                    Text("${product.name}"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           FlutterI18n.translate(context, "pages.product.price",
-                              translationParams: {"price": product.displayPrice}),
+                              translationParams: {
+                                "price": product.displayPrice
+                              }),
                           style: TextStyle(
                               color: Colors.green, fontWeight: FontWeight.bold),
                         ),

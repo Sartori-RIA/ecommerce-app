@@ -15,7 +15,7 @@ class ProductPage extends StatelessWidget {
     final _store = Provider.of<CartStore>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.name),
+        title: Text("${product.name}"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -30,15 +30,11 @@ class ProductPage extends StatelessWidget {
                         "assets/images/no-image.png",
                         height: 200,
                       )
-                    : Image.network(product.images[0].pdpThumbnailUrl),
-                IconButton(
-                    icon: Icon(CupertinoIcons.heart),
-                    iconSize: 30,
-                    onPressed: () {})
+                    : Image.network(product.master.images[0].pdpThumbnailUrl),
               ],
             ),
             Text(
-              product.name,
+              "${product.name}",
               style: Theme.of(context).textTheme.headline6,
             ),
             Padding(
@@ -61,7 +57,7 @@ class ProductPage extends StatelessWidget {
                 ],
               ),
             ),
-            Text(product.description),
+            Text("${product.description}"),
           ],
         ),
       ),

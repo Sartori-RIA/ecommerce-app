@@ -41,9 +41,17 @@ abstract class _CartStore with Store {
 
   @action
   Future<void> addItem(int itemId) async {
-    cart = await _repository.addItem(quantity: 1, itemId: itemId);
-    order = await _orderRepository.findOrder(cart.attributes.number);
-    totalItems = order.totalQuantity;
+    try {
+      loading = true;
+      cart = await _repository.addItem(quantity: 1, itemId: itemId);
+      order = await _orderRepository.findOrder(cart.attributes.number);
+      totalItems = order.totalQuantity;
+    } catch (e, s) {
+      print(e);
+      print(s);
+    } finally {
+      loading = false;
+    }
   }
 
   @action
